@@ -21,15 +21,17 @@ export default function Todo(props: Task) {
   ];
   const activeClasses = ["bg-cyan-50", "hover:bg-slate-200"];
   const disabledClasses = ["bg-emerald-300", "hover:bg-emerald-400"];
-  console.log(props.createdDate);
   const parentClass = props.completed
     ? activeClasses.concat(parentClasses).join(" ")
     : disabledClasses.concat(parentClasses).join(" ");
-  const formattedDueDate = formatDate(new Date(props.dueDate + "T00:00"), {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-  });
+  const formattedDueDate =
+    props.dueDate !== undefined
+      ? formatDate(new Date(props.dueDate), {
+          weekday: "short",
+          day: "numeric",
+          month: "short",
+        })
+      : "";
   return (
     <div className={parentClass}>
       <p className="font-sans">{props.name}</p>

@@ -24,7 +24,6 @@ function App() {
     fetchData()
       .then((val) => {
         fetchTask(val);
-        console.log("123");
       })
       .catch((err) => {
         console.log(err);

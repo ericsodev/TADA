@@ -2,10 +2,10 @@ import React from "react";
 type Priority = "planned" | "sidequest" | "urgent";
 
 export interface Task {
-  _id: String;
+  _id: string;
   name: string;
-  createdDate: Date;
-  dueDate?: Date;
+  createdDate: string;
+  dueDate?: string;
   priority: Priority;
   completed: boolean;
 }
