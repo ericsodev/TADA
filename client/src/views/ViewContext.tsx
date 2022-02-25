@@ -1,7 +1,4 @@
-import DayView from "./DayView";
-import WeekView from "./WeekView";
-import ScopedView from "./ScopedView";
-import GlobalView from "./GlobalView";
+import { DayView, GlobalView, ScopedView, WeekView } from "./Views";
 import React, { useContext } from "react";
 
 export const Views = {

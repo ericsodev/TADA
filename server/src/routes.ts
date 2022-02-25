@@ -38,11 +38,10 @@ router.delete("/todo/:id", async (req, res) => {
 });
 
 // PATCH: Update a Todo
+// FIXME: req.body does not destructure such that the todo is update.
 router.patch("/todo/:id", async (req, res) => {
     try {
-        console.log("running patch");
-        console.log(req.params.id);
-        const todo = await Todo.findOneAndUpdate({ _id: req.params.id }, { name: "hello, i changed" });
+        const todo = await Todo.findOneAndUpdate({ _id: req.params.id }, { ...req.body });
         res.send(todo);
     } catch (err) {
         console.log(err);
