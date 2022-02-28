@@ -1,4 +1,5 @@
-import { ViewContext, Views } from "./ViewContext";
+import { ViewContext } from "./ViewContext";
+import { Views } from "./Views";
 import { useContext } from "react";
 
 export default function ViewWrapper() {

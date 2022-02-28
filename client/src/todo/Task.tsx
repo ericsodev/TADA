@@ -67,3 +67,28 @@ export async function deleteTask(id: string) {
     console.log(err);
   }
 }
+
+interface ICreateTask {
+  name: string;
+  dueDate?: string;
+  priority: Priority;
+}
+export async function createTask({ name, dueDate, priority }: ICreateTask) {
+  const task = {
+    name: name,
+    dueDate: dueDate,
+    createdDate: new Date(Date.now()).toISOString(),
+    priority: priority,
+    completed: false,
+  };
+  console.table(task);
+  try {
+    await fetch("http://localhost:5000/api/todo", {
+      method: "POST",
+      body: JSON.stringify(task),
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}

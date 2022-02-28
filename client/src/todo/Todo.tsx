@@ -1,13 +1,7 @@
 import { Icon } from "@iconify/react";
 import { formatDate } from "../utilities/DateUtil";
-import {
-  Task,
-  updateTask,
-  deleteTask,
-  TaskContext,
-  getTasks,
-} from "../models/Task";
-import ToolTip from "./ToolTip";
+import { Task, updateTask, deleteTask, TaskContext, getTasks } from "./Task";
+import ToolTip from "../components/ToolTip";
 import { useContext } from "react";
 
 // TODO: Create an interface for these props

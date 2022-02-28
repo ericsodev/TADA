@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Selector from "./components/Selector";
 import { ViewContext, ViewTypes } from "./views/ViewContext";
 import ViewWrapper from "./views/ViewWrapper";
-import { Task, TaskContext, getTasks } from "./models/Task";
+import { Task, TaskContext, getTasks } from "./todo/Task";
 import Header from "./components/Header";
-import StatusBar from "./components/StatusBar";
+import StatusBar from "./status/StatusBar";
 
 function App() {
   const [view, setView] = useState<ViewTypes>("Day");

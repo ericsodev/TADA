@@ -1,12 +1,6 @@
-import { DayView, GlobalView, ScopedView, WeekView } from "./Views";
+import { Views } from "./Views";
 import React, { useContext } from "react";
 
-export const Views = {
-  Day: DayView,
-  Week: WeekView,
-  Scoped: ScopedView,
-  Global: GlobalView,
-};
 export type ViewTypes = keyof typeof Views;
 interface IViewContext {
   selectedView: ViewTypes;
