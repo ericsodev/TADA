@@ -7,6 +7,9 @@ module.exports = {
         display: ["Metropolis", "Oswald"],
         mono: ["ui-monospace", "SFMono-Regular"],
       },
+      translate: {
+        "2x": "200%",
+      },
     },
   },
   variants: {

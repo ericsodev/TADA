@@ -14,6 +14,16 @@ router.get("/todo", async (_req, res) => {
     }
 });
 
+// GET: Retrive todo by <id>
+router.get("/todo/:id", async (req, res) => {
+    try {
+        const todo = await Todo.findById(req.params.id);
+        res.send(todo);
+    } catch {
+        res.status(404).send({ error: "Todo with this id does not exist!" });
+    }
+});
+
 // POST: Create new Todo
 router.post("/todo", async (req, res) => {
     try {
@@ -30,7 +40,7 @@ router.post("/todo", async (req, res) => {
 router.delete("/todo/:id", async (req, res) => {
     try {
         const deleted = await Todo.findOneAndDelete({ _id: req.params.id });
-        res.status(204).send(deleted);
+        res.send(deleted);
     } catch (err) {
         console.log(err);
         res.status(400).send({ error: "Error deleting Todo" });
@@ -40,9 +50,13 @@ router.delete("/todo/:id", async (req, res) => {
 // PATCH: Update a Todo
 router.patch("/todo/:id", async (req, res) => {
     try {
-        console.log("running patch");
-        console.log(req.params.id);
-        const todo = await Todo.findOneAndUpdate({ _id: req.params.id }, { name: "hello, i changed" });
+        const todo = await Todo.findOneAndUpdate(
+            { _id: req.params.id },
+            { ...req.body },
+            {
+                returnOriginal: false,
+            }
+        );
         res.send(todo);
     } catch (err) {
         console.log(err);

@@ -17,8 +17,13 @@ code {
 }
 
 html,
-body,
-#root {
-  height: 100%;
-  width: 100%j;
+body {
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+}
+
+#root,
+#root > .App {
+  min-height: 100vh;
 }
