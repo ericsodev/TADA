@@ -1,7 +1,7 @@
-import { Views } from "./Views";
-import React, { useContext } from "react";
+import { ViewTypes } from "../views/Views";
+import React from "react";
 
-export type ViewTypes = keyof typeof Views;
+// TODO: Check if there is need for this Context.
 interface IViewContext {
   selectedView: ViewTypes;
   setView: (view: ViewTypes) => void;

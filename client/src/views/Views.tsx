@@ -9,3 +9,5 @@ export const Views = {
   Scoped: ScopedView,
   Global: GlobalView,
 };
+
+export type ViewTypes = keyof typeof Views;
