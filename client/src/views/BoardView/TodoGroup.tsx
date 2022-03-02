@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { reduceEachTrailingCommentRange } from "typescript";
 import { TODO_DICT_ASYNC_ACTIONS as DICT_ACTIONS } from "../../reducers/todoDictReducer";
 import TodoDictContext from "../../store/TodoDictContext";
 import { Task } from "../../todo/TodoAPI";
-import TodoCard from "../../todo/TodoCard";
+import TodoCard, { SkeletonTodoCard } from "../../todo/TodoCard";
 
 interface ITodoGroup {
   todos: Array<Task>;
@@ -18,11 +19,15 @@ const titleColors = {
 
 export default function TodoGroup({ todos, title, className }: ITodoGroup): JSX.Element {
   const { todoDict, dispatchTodoDict } = useContext(TodoDictContext);
+  const [showSkeleton, setShowSkeleton] = useState<boolean>(false);
+
   const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const _id: string = e.dataTransfer.getData("_id");
     const completed = todoDict[_id].completed;
+    setShowSkeleton(false);
     if (title === "completed") {
+      if (completed) return;
       dispatchTodoDict({
         type: DICT_ACTIONS.UPDATE_TASK,
         payload: { update: { _id: _id, completed: true } },
@@ -41,13 +46,19 @@ export default function TodoGroup({ todos, title, className }: ITodoGroup): JSX.
       }
     }
   };
-  // TODO: Implement dropped preview
-  const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {};
+  const onDragEnter = () => {
+    setShowSkeleton(true);
+    console.log("entered");
+  };
+  const onDragExit = () => {
+    setShowSkeleton(false);
+  };
   return (
     <div
       onDrop={onDrop}
       onDragOver={(e) => e.preventDefault()}
       onDragEnter={onDragEnter}
+      onDragExit={onDragExit}
       className={`flex grow basis-1/3 flex-col gap-y-6 lg:gap-y-8 ${className}`}>
       <h1 className={`font-sans text-2xl font-medium ${titleColors[title]} md:text-4xl`}>
         {title.toLowerCase()}
@@ -56,6 +67,7 @@ export default function TodoGroup({ todos, title, className }: ITodoGroup): JSX.
         {todos.map((todo) => {
           return <TodoCard todo={todo} group={title}></TodoCard>;
         })}
+        {showSkeleton ? <SkeletonTodoCard group={title}></SkeletonTodoCard> : <></>}
       </div>
     </div>
   );

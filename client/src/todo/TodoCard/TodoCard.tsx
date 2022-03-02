@@ -51,3 +51,14 @@ export default function TodoCard({ todo, group, classNames }: ITodoCard) {
     </div>
   );
 }
+
+export function SkeletonTodoCard({
+  group,
+}: {
+  group: "planned" | "urgent" | "completed";
+}): JSX.Element {
+  return (
+    <div
+      className={`relative flex h-16 w-full flex-col justify-between overflow-clip rounded-lg p-2 duration-75 lg:h-32 lg:px-4 lg:py-6 ${themes[group]}`}></div>
+  );
+}
