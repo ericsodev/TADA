@@ -1,7 +1,7 @@
 import { Task } from "../TodoAPI";
 import React, { useContext } from "react";
 import { TODO_DICT_ASYNC_ACTIONS } from "../../reducers/todoDictReducer";
-import { TodoDictContext } from "../../store/TodoDictContext";
+import TodoDictContext from "../../store/TodoDictContext";
 import { Icon } from "@iconify/react";
 
 interface IButtonGroup {
@@ -11,19 +11,19 @@ interface IButtonGroup {
 export default function ButtonGroup(props: IButtonGroup): JSX.Element {
   const { dispatchTodoDict } = useContext(TodoDictContext);
   const toggleCompleteColour = props.completed
-    ? "bg-amber-200 text-amber-800"
-    : "bg-lime-300 text-lime-800";
+    ? "bg-amber-200 text-amber-800 hover:bg-amber-300 active:bg-amber-400"
+    : "bg-lime-300 text-lime-800 hover:bg-lime-400 active:bg-lime-500";
 
   return (
     <div className="item-center absolute right-2.5 top-1/2 flex origin-left -translate-y-1/2 scale-0 flex-row gap-1 transition-all delay-75 duration-100 hover:delay-700 group-hover:scale-100 lg:right-0 lg:gap-2.5 lg:pl-4 lg:group-hover:translate-x-full">
       <div
         onClick={onToggleComplete({ ...props, dispatch: dispatchTodoDict })}
-        className={`cursor-pointer rounded-xl p-2 font-sans text-xl lg:p-3 ${toggleCompleteColour}`}>
+        className={`transition-color cursor-pointer rounded-xl p-2 font-sans text-xl shadow-xl duration-100 lg:p-3 ${toggleCompleteColour}`}>
         <Icon icon={props.completed ? "ic:baseline-refresh" : "akar-icons:check"}></Icon>
       </div>
       <div
         onClick={onDelete({ _id: props._id, dispatch: dispatchTodoDict })}
-        className="cursor-pointer rounded-xl bg-rose-200 p-2 font-sans text-xl text-red-700 lg:p-3">
+        className="transiton-color cursor-pointer rounded-xl bg-rose-200 p-2 font-sans text-xl text-red-700 shadow-xl duration-100 hover:bg-rose-300 active:bg-rose-400 active:text-red-800 lg:p-3">
         <Icon icon="bx:trash"></Icon>
       </div>
     </div>

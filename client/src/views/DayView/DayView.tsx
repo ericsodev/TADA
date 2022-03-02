@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import TodoRow from "../../todo/TodoRow/";
-import CreateTodoCard from "./CreateTodoCard";
-import { TodoDictContext } from "../../store/TodoDictContext";
+import TodoRow from "../../todo/TodoRow";
+import CreateTodoCard from "../components/CreateTodoCard";
+import TodoDictContext from "../../store/TodoDictContext";
 import { TODO_DICT_ASYNC_ACTIONS } from "../../reducers/todoDictReducer";
 
 export default function DayView(): JSX.Element {
@@ -32,10 +32,10 @@ export default function DayView(): JSX.Element {
   }, [todoDict]);
 
   return (
-    <div className="flex grow flex-col pb-4 lg:mt-8 lg:pb-12">
+    <div className="flex grow flex-col pb-8 lg:mt-8 lg:pb-16">
       <div className="flex flex-row justify-center">
         <div className="flex grow-0 basis-full flex-col items-stretch justify-start gap-3 px-4 sm:basis-5/6 md:basis-1/2 lg:px-8 xl:basis-1/3">
-          <CreateTodoCard></CreateTodoCard>
+          <CreateTodoCard defaultDueDate={new Date(Date.now()).toISOString()}></CreateTodoCard>
           <div className="flex flex-col gap-3">{activeTodos}</div>
           <div className="flex flex-col gap-3">{completedTodos}</div>
         </div>

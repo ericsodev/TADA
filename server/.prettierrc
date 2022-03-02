@@ -1,7 +1,7 @@
 {
-    "singleQuote": false,
-    "trailingComma": "es5",
-    "printWidth": 130,
-    "tabWidth": 4,
-    "disableLanguages": []
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "printWidth": 130,
+  "tabWidth": 2,
+  "disableLanguages": []
 }

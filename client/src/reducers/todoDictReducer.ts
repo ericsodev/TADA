@@ -6,7 +6,7 @@ export const TODO_DICT_ASYNC_ACTIONS = {
   DELETE_TASK: "del_new_task",
   UPDATE_TASK: "update_task",
   FETCH_ALL_TASKS: "fetch_all_tasks",
-  FETCH_QUERY_TASKS: "fetch_query_tasks",
+  FETCH_QUERY_TASKS: "fetch_query_tasks", // TODO: Implement this! (used for dayview)
 };
 
 export const TODO_REDUCER_ACTIONS = {

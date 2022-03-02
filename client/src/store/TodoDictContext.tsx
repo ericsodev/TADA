@@ -7,7 +7,7 @@ interface ITodoListContext {
 }
 
 // TodoListContext should be used in conjuction with useReducer
-export const TodoDictContext = React.createContext<ITodoListContext>({
+export default React.createContext<ITodoListContext>({
   todoDict: {},
   dispatchTodoDict: async (_action) => {
     return;
