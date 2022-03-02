@@ -1,5 +1,5 @@
-# TADA
-There's Another Todo App
+# TADA! 
+There's Another toDo App
 
 ## Motivation
 - Learn to authenticate using OAuth 2.0 and third party services
