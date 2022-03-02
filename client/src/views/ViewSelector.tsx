@@ -12,10 +12,10 @@ export default function ViewSelector() {
         onClick={() => setView(element as ViewTypes)}
         className={`${
           element === selectedView
-            ? "bg-lime-300 hover:bg-lime-400"
-            : "bg-sky-100 hover:bg-lime-200"
+            ? "bg-lime-300 hover:bg-lime-400 active:bg-lime-500"
+            : "bg-sky-100 hover:bg-lime-200 active:bg-slate-300"
         } 
-        cursor-pointer rounded-xl py-1 px-5 font-sans text-base shadow-md active:bg-slate-300`}>
+        cursor-pointer rounded-xl py-1 px-5 font-sans text-base shadow-md`}>
         {element}
       </div>
     );

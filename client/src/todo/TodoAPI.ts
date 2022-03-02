@@ -21,7 +21,6 @@ export const TaskContext = React.createContext<ITaskListContext>({
 });
 
 export async function getTasks(): Promise<Array<Task>> {
-  console.log("fetching");
   try {
     const data: Array<Task> = await (await fetch("http://localhost:5000/api/todo")).json();
     return data;
