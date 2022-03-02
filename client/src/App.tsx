@@ -3,7 +3,7 @@ import ViewWrapper from "./views/ViewWrapper";
 
 function App() {
   return (
-    <div className="App h-full bg-slate-800">
+    <div className="App flex h-full flex-col bg-slate-800">
       <ViewWrapper></ViewWrapper>
     </div>
   );
