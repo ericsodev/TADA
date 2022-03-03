@@ -2,7 +2,7 @@ import { Task } from "../TodoAPI";
 import { formatDate } from "../../utilities/DateUtil";
 import { isUndefined } from "util";
 import ToolTip from "../../components/ToolTip";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface ITodoCard {
   todo: Task;
@@ -21,6 +21,17 @@ export default function TodoCard({ todo, group, classNames }: ITodoCard) {
   const dragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData("_id", todo._id);
   };
+
+  useEffect(()=>{
+    document.addEventListener('contextmenu', (e)=>{
+      e.preventDefault()
+    })
+    document.addEventListener('click', (e)=>{
+      // For closing context menu
+    })
+  },[])
+
+
   return (
     <div
       draggable="true"
