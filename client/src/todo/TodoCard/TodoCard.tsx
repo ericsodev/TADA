@@ -29,8 +29,8 @@ export default function TodoCard({ todo, group, classNames }: ITodoCard) {
         e.stopPropagation();
       }}
       className={`relative flex h-16 w-full flex-col justify-between overflow-clip rounded-lg p-2 duration-75 lg:h-32 lg:px-4 lg:py-6 ${themes[group]}`}>
-      <span className="max-w-24 group font-sans text-sm font-semibold text-slate-900 lg:max-w-32ch xl:text-lg">
-        <h1 className="overflow-hidden overflow-ellipsis whitespace-nowrap">{todo.name}</h1>
+      <span className="max-w-24 group font-sans font-semibold text-slate-900 lg:max-w-32ch">
+        <h1 className="overflow-hidden text-sm xl:text-base overflow-ellipsis whitespace-nowrap">{todo.name}</h1>
         {todo.name.length > 24 ? (
           <div className="no-scrollbar absolute top-0 right-0 left-0 bottom-0 origin-top scale-0 overflow-y-scroll whitespace-pre-wrap bg-zinc-100 px-6 py-4 font-sans text-base font-medium text-slate-700 duration-100 group-hover:scale-100">
             {todo.name}
@@ -39,7 +39,7 @@ export default function TodoCard({ todo, group, classNames }: ITodoCard) {
           <></>
         )}
       </span>
-      <span className="font-sans text-sm text-slate-600 lg:text-base">
+      <span className="font-sans text-sm text-slate-600">
         {group === "completed" || todo.dueDate === undefined || todo.dueDate === null
           ? ""
           : formatDate(new Date(Date.parse(todo.dueDate)), {
