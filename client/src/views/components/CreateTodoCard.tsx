@@ -7,9 +7,18 @@ import { TODO_DICT_ASYNC_ACTIONS } from "../../reducers/todoDictReducer";
 interface ITodoCard {
   defaultDueDate?: string;
 }
+interface IFormData {
+  name: string;
+  priority: Priority;
+}
+const SelectThemes = {
+  planned: "bg-cyan-100 text-cyan-500",
+  sidequest: "bg-amber-100 text-amber-600",
+  urgent: "bg-rose-100 text-rose-500",
+};
 export default function CreateTodoCard({ defaultDueDate }: ITodoCard): JSX.Element {
   const [collapsed, setCollapsed] = useState<boolean>(true);
-  const [formData, setFormData] = useState({ name: "", priority: "planned" });
+  const [formData, setFormData] = useState<IFormData>({ name: "", priority: "planned" });
   const inputRef = useRef<HTMLInputElement>(null);
   const { dispatchTodoDict } = useContext(TodoDictContext);
   useEffect(() => {
@@ -57,10 +66,22 @@ export default function CreateTodoCard({ defaultDueDate }: ITodoCard): JSX.Eleme
   };
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>): void => {
     e.preventDefault();
-    if (e.target.name === "name" || e.target.name === "priority") {
+    if (e.target.name === "name") {
       let newData = formData;
       newData[e.target.name] = e.target.value;
       setFormData({ ...newData });
+    } else if (e.target.name === "priority") {
+      let newData = formData;
+
+      // Typescript made me do this...
+      if (
+        e.target.value === "planned" ||
+        e.target.value === "sidequest" ||
+        e.target.value === "urgent"
+      ) {
+        newData[e.target.name] = e.target.value;
+        setFormData({ ...newData });
+      }
     }
   };
   useEffect(() => {
@@ -96,16 +117,16 @@ export default function CreateTodoCard({ defaultDueDate }: ITodoCard): JSX.Eleme
             name="priority"
             value={formData.priority}
             onChange={handleChange}
-            className=" grow-1 col-span-6 inline-block w-auto rounded-lg border-none bg-slate-200 py-1 px-2 text-slate-800 lg:px-3">
-            <option value="planned" className="bg-green-200 text-green-900">
-              planned
-            </option>
-            <option value="sidequest" className="bg-yellow-200 text-yellow-900">
-              sidequest
-            </option>
-            <option value="urgent" className="bg-red-200 text-red-900">
-              urgent
-            </option>
+            className={`grow-1 col-span-6 inline-block w-auto rounded-lg border-none ${
+              SelectThemes[formData.priority]
+            } py-1 px-2 text-slate-800 lg:px-3`}>
+            {Object.entries(SelectThemes).map(([key, val]) => {
+              return (
+                <option value={key} className={val}>
+                  {key}
+                </option>
+              );
+            })}
           </select>
           <button
             type="submit"
