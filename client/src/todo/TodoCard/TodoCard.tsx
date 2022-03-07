@@ -22,15 +22,14 @@ export default function TodoCard({ todo, group, classNames }: ITodoCard) {
     e.dataTransfer.setData("_id", todo._id);
   };
 
-  useEffect(()=>{
-    document.addEventListener('contextmenu', (e)=>{
-      e.preventDefault()
-    })
-    document.addEventListener('click', (e)=>{
+  useEffect(() => {
+    document.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
+    document.addEventListener("click", (e) => {
       // For closing context menu
-    })
-  },[])
-
+    });
+  }, []);
 
   return (
     <div
@@ -41,7 +40,9 @@ export default function TodoCard({ todo, group, classNames }: ITodoCard) {
       }}
       className={`relative flex h-16 w-full flex-col justify-between overflow-clip rounded-lg p-2 duration-75 lg:h-32 lg:px-4 lg:py-6 ${themes[group]}`}>
       <span className="max-w-24 group font-sans font-semibold text-slate-900 lg:max-w-32ch">
-        <h1 className="overflow-hidden text-sm xl:text-base overflow-ellipsis whitespace-nowrap">{todo.name}</h1>
+        <h1 className="overflow-hidden overflow-ellipsis whitespace-nowrap text-sm xl:text-base">
+          {todo.name}
+        </h1>
         {todo.name.length > 24 ? (
           <div className="no-scrollbar absolute top-0 right-0 left-0 bottom-0 origin-top scale-0 overflow-y-scroll whitespace-pre-wrap bg-zinc-100 px-6 py-4 font-sans text-base font-medium text-slate-700 duration-100 group-hover:scale-100">
             {todo.name}
@@ -70,6 +71,6 @@ export function SkeletonTodoCard({
 }): JSX.Element {
   return (
     <div
-      className={`relative flex h-16 w-full flex-col justify-between overflow-clip rounded-lg p-2 duration-75 lg:h-32 lg:px-4 lg:py-6 ${themes[group]}`}></div>
+      className={`relative flex h-16 w-full flex-col justify-between overflow-clip rounded-lg border-2 border-dashed border-slate-500 bg-opacity-20 p-2 duration-75 lg:h-32 lg:px-4 lg:py-6 ${themes[group]}`}></div>
   );
 }
