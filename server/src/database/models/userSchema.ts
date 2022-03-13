@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Schema, model } from "mongoose";
 
 const UserSchema = new Schema({
-    discordId: { type: String, required: true },
+    discordId: { type: String, required: true, immutable: true },
     alias: { type: String, required: false },
 });
 
