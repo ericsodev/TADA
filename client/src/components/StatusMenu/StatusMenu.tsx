@@ -44,9 +44,14 @@ export default function StatusMenu(): JSX.Element {
     );
   } else {
     return (
-      <div className="flex flex-row">
-        Logged in as
-        {user.username}
+      <div className="flex flex-row items-center justify-end gap-x-8 py-3 px-6">
+        <text className="font-sans font-medium text-purple-100">
+          Logged in as <strong className="text-purple-300">{user.username}</strong>
+        </text>
+        <img
+          className="rounded-full border-2 border-solid border-purple-200 drop-shadow-lg"
+          alt="Discord profile picture"
+          src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=48`}></img>
       </div>
     );
   }
