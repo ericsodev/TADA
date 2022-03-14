@@ -11,11 +11,11 @@ There's Another toDo App
 
 ### Day View
 
-![Dayview](https://github.com/ericsodev/TADA/blog/main/readme_assets/day.png)
+![Dayview](https://github.com/ericsodev/TADA/blob/main/readme_assets/day.png)
 
 ### Board View
 
-![Boardview](https://github.com/ericsodev/TADA/blog/main/readme_assets/board.png)
+![Boardview](https://github.com/ericsodev/TADA/blob/main/readme_assets/board.png)
 
 ## Progress
 
