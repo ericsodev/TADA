@@ -1,20 +1,10 @@
 import { formatDate } from "../../helpers/DateUtil";
 
-const dailyPhrases: Array<string> = [
-  "No pressure, no diamonds",
-  "Screw it, let's do it",
-  "In the end, you just have to pull the trigger",
-  "Pressure's what you make of it",
-  "Sometimes you just gotta lick the stamp and send it",
-];
-
 interface HeaderProp {
   title: string;
-  showMessage: boolean;
 }
 
 export default function Header(prop: HeaderProp) {
-  const randomNum = Math.floor(Math.random() * dailyPhrases.length);
   let date = (
     <p className="hidden w-fit font-sans text-xl font-medium text-lime-200 md:inline-block">
       Today is{" "}
@@ -31,13 +21,6 @@ export default function Header(prop: HeaderProp) {
         {prop.title}
       </h1>
       {date}
-      {prop.showMessage ? (
-        <p className="hidden w-fit font-sans text-lg italic text-lime-200 md:inline-block">
-          {dailyPhrases[randomNum]}
-        </p>
-      ) : (
-        <></>
-      )}
     </div>
   );
 }

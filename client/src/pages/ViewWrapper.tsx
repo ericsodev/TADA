@@ -7,10 +7,10 @@ import Header from "../components/Header/";
 import { todoReducer, todoAsyncReducer } from "../common/reducers/todoDictReducer";
 
 const headerProps = {
-  Day: { title: "Day", showMessage: true },
-  Scoped: { title: "Scoped", showMessage: true },
-  Board: { title: "", showMessage: false },
-  Global: { title: "Global", showMessage: false },
+  Day: { title: "Day" },
+  Scoped: { title: "Scoped" },
+  Board: { title: "Board" },
+  Global: { title: "Global" },
 };
 
 export default function ViewWrapper() {

@@ -46,6 +46,11 @@ export default function DayView(): JSX.Element {
           <CreateTodoCard defaultDueDate={new Date(Date.now()).toISOString()}></CreateTodoCard>
           <div className="flex flex-col gap-3">{activeTodos}</div>
           <div className="flex flex-col gap-3">{completedTodos}</div>
+          <text className="text-center font-sans text-lg text-slate-300">
+            {activeTodos.length + completedTodos.length == 0
+              ? "It looks pretty empty here. Try adding something to do!"
+              : ""}
+          </text>
         </div>
       </div>
     </div>
