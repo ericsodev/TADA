@@ -22,4 +22,4 @@ Why have Todo lists in markdown when I can build my own
   - [ ] Add logout route
 - [ ] Implement more complex Todo queries and editing system
 - [ ] Add progress tracking Todos
-- [ ] Add notification/alerts (perhaps sms API)
+- [ ] Add notification/alerts (perhaps SMS API)
