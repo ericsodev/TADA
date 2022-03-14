@@ -67,13 +67,17 @@ async function register_user(auth_token: string): Promise<boolean> {
     // Get User ID from Discord
     try {
         const discord_res = await fetch("https://discord.com/api/users/@me", {
-            Authorization: `Bearer ${auth_token}`,
+            headers: {
+                authorization: `Bearer ${auth_token}`,
+            },
+            mode: "cors",
         });
         const discord_user_id = (await discord_res.json()).id;
 
-        if ((await User.findOne({ userId: discord_user_id })) === null) {
+        if ((await User.findOne({ discordId: discord_user_id })) === null) {
             // User has not been created, create and save new user
-            const newUser = new User({ userId: discord_user_id });
+            console.log(`HERE: ${discord_user_id}`);
+            const newUser = new User({ discordId: discord_user_id });
             newUser.save();
         }
 
