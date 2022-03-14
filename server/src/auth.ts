@@ -2,6 +2,7 @@ import { Router } from "express";
 import fetch from "node-fetch";
 import querystring from "querystring";
 import btoa from "btoa";
+import User from "./database/models/userSchema";
 
 const router = Router();
 const SERVER_PORT: number = parseInt(process.env["PORT"]) | 5000;
@@ -51,7 +52,36 @@ router.get("/callback", async (req, res) => {
         }),
     });
     const auth_res: Record<any, any> = await response.json();
-    res.redirect(`http://localhost:${FRONTEND_PORT}/?token=${auth_res.access_token}`);
+    if (await register_user(auth_res.access_token)) {
+        res.redirect(`http://localhost:${FRONTEND_PORT}/?token=${auth_res.access_token}`);
+    } else {
+        res.status(400).send({ error: "Unable to verify existing User or create new User." });
+    }
 });
+
+/* 
+Registers a user if the user does not exist in DB
+Returns true if the user exists or is created, false if the user has not been created
+*/
+async function register_user(auth_token: string): Promise<boolean> {
+    // Get User ID from Discord
+    try {
+        const discord_res = await fetch("https://discord.com/api/users/@me", {
+            Authorization: `Bearer ${auth_token}`,
+        });
+        const discord_user_id = (await discord_res.json()).id;
+
+        if ((await User.findOne({ userId: discord_user_id })) === null) {
+            // User has not been created, create and save new user
+            const newUser = new User({ userId: discord_user_id });
+            newUser.save();
+        }
+
+        return true;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
 
 export default router;
