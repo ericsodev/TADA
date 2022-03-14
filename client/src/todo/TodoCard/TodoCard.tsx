@@ -1,11 +1,11 @@
-import { Task } from "../TodoAPI";
+import { Todo } from "../../common/types";
 import { formatDate } from "../../utilities/DateUtil";
 import { isUndefined } from "util";
 import ToolTip from "../../components/ToolTip";
 import React, { useEffect } from "react";
 
 interface ITodoCard {
-  todo: Task;
+  todo: Todo;
   group: "planned" | "urgent" | "completed";
   classNames?: string;
 }

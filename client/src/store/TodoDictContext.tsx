@@ -1,8 +1,8 @@
 import React from "react";
-import { Task } from "../todo/TodoAPI";
+import { Todo } from "../common/types";
 
 interface ITodoListContext {
-  todoDict: Record<string, Task>;
+  todoDict: Record<string, Todo>;
   dispatchTodoDict: (action: any) => Promise<void>;
 }
 

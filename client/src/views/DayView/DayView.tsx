@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TodoRow from "../../todo/TodoRow";
 import CreateTodoCard from "../components/CreateTodoCard";
 import TodoDictContext from "../../store/TodoDictContext";

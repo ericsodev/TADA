@@ -1,8 +1,8 @@
-import { Task, Priority } from "../../todo/TodoAPI";
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
 import TodoDictContext from "../../store/TodoDictContext";
 import { TODO_DICT_ASYNC_ACTIONS } from "../../reducers/todoDictReducer";
+import { Todo, Priority } from "../../common/types";
 
 interface ITodoCard {
   defaultDueDate?: string;

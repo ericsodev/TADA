@@ -1,18 +1,8 @@
 import React from "react";
-export type Priority = "planned" | "sidequest" | "urgent";
-
-export interface Task {
-  _id: string;
-  userId?: string;
-  name: string;
-  createdDate: string;
-  dueDate?: string;
-  priority: Priority;
-  completed: boolean;
-}
+import { Todo, Priority } from "../common/types";
 
 interface ITaskListContext {
-  todoList: Array<Task>;
+  todoList: Array<Todo>;
   setTasks: (_update: any) => void;
 }
 
@@ -21,9 +11,9 @@ export const TaskContext = React.createContext<ITaskListContext>({
   setTasks: (_update) => {},
 });
 
-export async function getTasks(): Promise<Array<Task>> {
+export async function getTasks(): Promise<Array<Todo>> {
   try {
-    const data: Array<Task> = await (await fetch("http://localhost:5000/api/todo")).json();
+    const data: Array<Todo> = await (await fetch("http://localhost:5000/api/todo")).json();
     return data;
   } catch (err) {
     console.log("Error fetching tasks");
@@ -34,6 +24,7 @@ export async function getTasks(): Promise<Array<Task>> {
 
 interface IUpdateTask {
   _id: string;
+  userId: string;
   name?: string;
   createdDate?: string;
   dueDate?: string;
@@ -41,9 +32,9 @@ interface IUpdateTask {
   completed?: boolean;
 }
 
-export async function updateTask(update: IUpdateTask): Promise<Task | null> {
+export async function updateTask(update: IUpdateTask): Promise<Todo | null> {
   try {
-    const updatedTask: Task = await (
+    const updatedTask: Todo = await (
       await fetch(`http://localhost:5000/api/todo/${update._id}`, {
         method: "PATCH",
         headers: {
@@ -61,9 +52,9 @@ export async function updateTask(update: IUpdateTask): Promise<Task | null> {
   }
 }
 
-export async function deleteTask(id: string): Promise<Task | null> {
+export async function deleteTask(id: string): Promise<Todo | null> {
   try {
-    const deletedTask: Task = await (
+    const deletedTask: Todo = await (
       await fetch(`http://localhost:5000/api/todo/${id}`, {
         method: "DELETE",
       })
@@ -80,7 +71,7 @@ interface ICreateTask {
   dueDate?: string;
   priority: Priority;
 }
-export async function createTask({ name, dueDate, priority }: ICreateTask): Promise<Task | null> {
+export async function createTask({ name, dueDate, priority }: ICreateTask): Promise<Todo | null> {
   const task = {
     name: name,
     dueDate: dueDate,

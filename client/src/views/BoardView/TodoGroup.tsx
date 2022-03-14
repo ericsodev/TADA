@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { reduceEachTrailingCommentRange } from "typescript";
 import { TODO_DICT_ASYNC_ACTIONS as DICT_ACTIONS } from "../../reducers/todoDictReducer";
 import TodoDictContext from "../../store/TodoDictContext";
-import { Task } from "../../todo/TodoAPI";
+import { Todo } from "../../common/types";
 import TodoCard, { SkeletonTodoCard } from "../../todo/TodoCard";
 
 interface ITodoGroup {
-  todos: Array<Task>;
+  todos: Array<Todo>;
   title: "planned" | "urgent" | "completed";
   className?: string;
 }

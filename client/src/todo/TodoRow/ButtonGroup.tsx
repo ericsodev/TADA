@@ -1,5 +1,4 @@
-import { Task } from "../TodoAPI";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { TODO_DICT_ASYNC_ACTIONS } from "../../reducers/todoDictReducer";
 import TodoDictContext from "../../store/TodoDictContext";
 import { Icon } from "@iconify/react";

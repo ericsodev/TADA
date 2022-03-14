@@ -1,9 +1,7 @@
-import { Task } from "../../todo/TodoAPI";
+import { Todo } from "../../common/types";
 
 interface IContextMenu {
-    todo: Task
+  todo: Todo;
 }
 
-export default function ContextMenu() {
-
-}
+export default function ContextMenu() {}

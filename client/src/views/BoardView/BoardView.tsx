@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { Task } from "../../todo/TodoAPI";
 import TodoDictContext from "../../store/TodoDictContext";
 import { TODO_DICT_ASYNC_ACTIONS as dispatchActions } from "../../reducers/todoDictReducer";
 import TodoGroup from "./TodoGroup";
+import { Todo } from "../../common/types";
 
 export default function BoardView(): JSX.Element {
   const { todoDict, dispatchTodoDict } = useContext(TodoDictContext);
@@ -11,9 +11,9 @@ export default function BoardView(): JSX.Element {
     dispatchTodoDict({ type: dispatchActions.FETCH_ALL_TASKS });
   }, []);
   useEffect(() => {
-    let plannedArray: Array<Task> = [];
-    let urgentArray: Array<Task> = [];
-    let completedArray: Array<Task> = [];
+    let plannedArray: Array<Todo> = [];
+    let urgentArray: Array<Todo> = [];
+    let completedArray: Array<Todo> = [];
     for (const [_id, task] of Object.entries(todoDict)) {
       if (task.completed) {
         completedArray.push(task);

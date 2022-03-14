@@ -1,5 +1,6 @@
 import React from "react";
-import { Task, getTasks, updateTask, deleteTask, createTask } from "../todo/TodoAPI";
+import { getTasks, updateTask, deleteTask, createTask } from "../todo/TodoAPI";
+import { Todo } from "../common/types";
 
 export const TODO_DICT_ASYNC_ACTIONS = {
   ADD_NEW_TASK: "add_new_task",
@@ -16,8 +17,8 @@ export const TODO_REDUCER_ACTIONS = {
   SET_TASKS: "set_tasks",
 };
 
-export function todoReducer(state: Record<string, Task>, action: any): Record<string, Task> {
-  let newState: Record<string, Task> = {};
+export function todoReducer(state: Record<string, Todo>, action: any): Record<string, Todo> {
+  let newState: Record<string, Todo> = {};
   switch (action.type) {
     case TODO_REDUCER_ACTIONS.ADD_NEW_TASK:
       newState = { ...state }; // Shallow clone state so that ref is different and triggers state change
@@ -41,7 +42,7 @@ export function todoReducer(state: Record<string, Task>, action: any): Record<st
 }
 export function todoAsyncReducer(dispatch: React.Dispatch<any>): (action: any) => Promise<void> {
   return async (action: any): Promise<void> => {
-    let newTodoDict: Record<string, Task> = {};
+    let newTodoDict: Record<string, Todo> = {};
     let data: any;
     switch (action.type) {
       case TODO_DICT_ASYNC_ACTIONS.ADD_NEW_TASK:
@@ -66,7 +67,7 @@ export function todoAsyncReducer(dispatch: React.Dispatch<any>): (action: any) =
       case TODO_DICT_ASYNC_ACTIONS.FETCH_ALL_TASKS:
         newTodoDict = {};
         data = await getTasks();
-        data.forEach((task: Task) => {
+        data.forEach((task: Todo) => {
           newTodoDict[task._id] = task;
         });
         dispatch({ type: TODO_REDUCER_ACTIONS.SET_TASKS, payload: { tasks: newTodoDict } });
