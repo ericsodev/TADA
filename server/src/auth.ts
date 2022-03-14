@@ -3,6 +3,7 @@ import fetch from "node-fetch";
 import querystring from "querystring";
 import btoa from "btoa";
 import User from "./database/models/userSchema";
+import { getDiscordUser } from "./discordAPI";
 
 const router = Router();
 const SERVER_PORT: number = parseInt(process.env["PORT"]) | 5000;
@@ -62,7 +63,7 @@ router.get("/callback", async (req, res) => {
 router.get("/user/me", async (req, res) => {
     if (req.headers.authorization) {
         try {
-            let data = await getDiscorduser(req.headers.authorization);
+            let data = await getDiscordUser(req.headers.authorization);
             res.send(data);
         } catch (err) {
             res.status(400).send({ error: "Could not retrieve user info. Has your token expired?" });
@@ -71,17 +72,6 @@ router.get("/user/me", async (req, res) => {
         res.status(400).send({ error: "No token was provided" });
     }
 });
-
-async function getDiscorduser(token: string): Promise<Record<any, any> | null> {
-    const discord_res = await fetch("https://discord.com/api/users/@me", {
-        headers: {
-            authorization: token,
-        },
-        mode: "cors",
-    });
-    const user = await discord_res.json();
-    return user;
-}
 
 /* 
 Registers a user if the user does not exist in DB
