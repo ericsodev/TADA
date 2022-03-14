@@ -3,13 +3,19 @@ import TodoDictContext from "../../common/contexts/TodoDictContext";
 import { TODO_DICT_ASYNC_ACTIONS as dispatchActions } from "../../common/reducers/todoDictReducer";
 import TodoGroup from "./TodoGroup";
 import { Todo } from "../../common/types";
+import { TokenContext } from "../../common/contexts/TokenContext";
 
 export default function BoardView(): JSX.Element {
   const { todoDict, dispatchTodoDict } = useContext(TodoDictContext);
   const [todoArrays, setTodoArrays] = useState<any>({ planned: [], urgent: [], completed: [] }); // TODO: Write interface for this
+  const { token } = useContext(TokenContext);
+
   useEffect(() => {
-    dispatchTodoDict({ type: dispatchActions.FETCH_ALL_TASKS });
-  }, []);
+    if (token === "") {
+      return;
+    }
+    dispatchTodoDict({ type: dispatchActions.FETCH_ALL_TASKS, payload: { token: token } });
+  }, [token]);
   useEffect(() => {
     let plannedArray: Array<Todo> = [];
     let urgentArray: Array<Todo> = [];

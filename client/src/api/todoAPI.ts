@@ -11,9 +11,16 @@ export const TaskContext = React.createContext<ITaskListContext>({
   setTasks: (_update) => {},
 });
 
-export async function getTasks(): Promise<Array<Todo>> {
+export async function getTasks(token: string): Promise<Array<Todo>> {
   try {
-    const data: Array<Todo> = await (await fetch("http://localhost:5000/api/todo")).json();
+    console.log(token);
+    const data: Array<Todo> = await (
+      await fetch("http://localhost:5000/api/todo", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+    ).json();
     return data;
   } catch (err) {
     console.log("Error fetching tasks");
@@ -32,13 +39,14 @@ interface IUpdateTask {
   completed?: boolean;
 }
 
-export async function updateTask(update: IUpdateTask): Promise<Todo | null> {
+export async function updateTask(update: IUpdateTask, token: string): Promise<Todo | null> {
   try {
     const updatedTask: Todo = await (
       await fetch(`http://localhost:5000/api/todo/${update._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(update),
       })
@@ -52,11 +60,14 @@ export async function updateTask(update: IUpdateTask): Promise<Todo | null> {
   }
 }
 
-export async function deleteTask(id: string): Promise<Todo | null> {
+export async function deleteTask(todoId: string, token: string): Promise<Todo | null> {
   try {
     const deletedTask: Todo = await (
-      await fetch(`http://localhost:5000/api/todo/${id}`, {
+      await fetch(`http://localhost:5000/api/todo/${todoId}`, {
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       })
     ).json();
     return deletedTask;
@@ -71,7 +82,10 @@ interface ICreateTask {
   dueDate?: string;
   priority: Priority;
 }
-export async function createTask({ name, dueDate, priority }: ICreateTask): Promise<Todo | null> {
+export async function createTask(
+  { name, dueDate, priority }: ICreateTask,
+  token: string
+): Promise<Todo | null> {
   const task = {
     name: name,
     dueDate: dueDate,
@@ -83,7 +97,7 @@ export async function createTask({ name, dueDate, priority }: ICreateTask): Prom
     const res = await fetch("http://localhost:5000/api/todo", {
       method: "POST",
       body: JSON.stringify(task),
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
     });
     const newTask = await res.json();
     return newTask;

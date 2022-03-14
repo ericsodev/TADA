@@ -4,6 +4,7 @@ import { TODO_DICT_ASYNC_ACTIONS as DICT_ACTIONS } from "../../common/reducers/t
 import TodoDictContext from "../../common/contexts/TodoDictContext";
 import { Todo } from "../../common/types";
 import TodoCard, { SkeletonTodoCard } from "../../components/TodoCard";
+import { TokenContext } from "../../common/contexts/TokenContext";
 
 interface ITodoGroup {
   todos: Array<Todo>;
@@ -20,9 +21,13 @@ const titleColors = {
 export default function TodoGroup({ todos, title, className }: ITodoGroup): JSX.Element {
   const { todoDict, dispatchTodoDict } = useContext(TodoDictContext);
   const [showSkeleton, setShowSkeleton] = useState<boolean>(false);
+  const { token } = useContext(TokenContext);
 
   const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (token === "") {
+      return;
+    }
     const _id: string = e.dataTransfer.getData("_id");
     const completed = todoDict[_id].completed;
     setShowSkeleton(false);
@@ -30,18 +35,18 @@ export default function TodoGroup({ todos, title, className }: ITodoGroup): JSX.
       if (completed) return;
       dispatchTodoDict({
         type: DICT_ACTIONS.UPDATE_TASK,
-        payload: { update: { _id: _id, completed: true } },
+        payload: { update: { _id: _id, completed: true }, token: token },
       });
     } else if (title === "planned" || title === "urgent") {
       if (completed) {
         dispatchTodoDict({
           type: DICT_ACTIONS.UPDATE_TASK,
-          payload: { update: { _id: _id, completed: false, priority: title } },
+          payload: { update: { _id: _id, completed: false, priority: title }, token: token },
         });
       } else {
         dispatchTodoDict({
           type: DICT_ACTIONS.UPDATE_TASK,
-          payload: { update: { _id: _id, priority: title } },
+          payload: { update: { _id: _id, priority: title }, token: token },
         });
       }
     }

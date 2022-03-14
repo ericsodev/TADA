@@ -3,17 +3,19 @@ import { useContext, useEffect, useState } from "react";
 import { UserIDContext } from "../../common/contexts/UserContext";
 import { getAuthToken, getDiscordUser, revokeToken } from "../../api/userAPI";
 import { DiscordUser } from "../../common/types";
+import { TokenContext } from "../../common/contexts/TokenContext";
 
 export default function StatusMenu(): JSX.Element {
   const { setUserID } = useContext(UserIDContext);
   const [loggedIn, setLoggedIn] = useState(false);
-  let token: string | null = null;
   const [user, setUser] = useState<DiscordUser>({ id: "", username: "", avatar: "" });
+  const { token, setToken } = useContext(TokenContext);
 
   useEffect(() => {
-    token = getAuthToken();
-    if (token) {
-      getDiscordUser(token).then((res) => {
+    let tempToken = getAuthToken();
+    if (tempToken) {
+      setToken(tempToken);
+      getDiscordUser(tempToken).then((res) => {
         if (res) {
           // Got a response for discord user object
           setUser(res);
@@ -22,13 +24,12 @@ export default function StatusMenu(): JSX.Element {
         } else {
           // Token is probably expired
           revokeToken();
-          token = null;
+          setToken("");
           setLoggedIn(false);
         }
       });
     }
   }, []);
-  console.log(user);
   if (!loggedIn) {
     return (
       <div className="flex flex-row">

@@ -46,19 +46,19 @@ export function todoAsyncReducer(dispatch: React.Dispatch<any>): (action: any) =
     let data: any;
     switch (action.type) {
       case TODO_DICT_ASYNC_ACTIONS.ADD_NEW_TASK:
-        data = await createTask(action.payload.task);
+        data = await createTask(action.payload.task, action.payload.token);
         if (data !== null) {
           dispatch({ type: TODO_REDUCER_ACTIONS.ADD_NEW_TASK, payload: { task: data } });
         }
         return;
       case TODO_DICT_ASYNC_ACTIONS.DELETE_TASK:
-        data = await deleteTask(action.payload._id);
+        data = await deleteTask(action.payload._id, action.payload.token);
         if (data?._id === action.payload._id) {
           dispatch({ type: TODO_REDUCER_ACTIONS.DELETE_TASK, payload: { id: data._id } });
         }
         return;
       case TODO_DICT_ASYNC_ACTIONS.UPDATE_TASK:
-        data = await updateTask(action.payload.update);
+        data = await updateTask(action.payload.update, action.payload.token);
         if (data !== null) {
           dispatch({ type: TODO_REDUCER_ACTIONS.UPDATE_TASK, payload: { task: data } });
         }
@@ -66,7 +66,7 @@ export function todoAsyncReducer(dispatch: React.Dispatch<any>): (action: any) =
 
       case TODO_DICT_ASYNC_ACTIONS.FETCH_ALL_TASKS:
         newTodoDict = {};
-        data = await getTasks();
+        data = await getTasks(action.payload.token);
         if (data !== null) {
           data.forEach((task: Todo) => {
             newTodoDict[task._id] = task;

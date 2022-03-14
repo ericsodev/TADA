@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import TodoDictContext from "../../common/contexts/TodoDictContext";
 import { TODO_DICT_ASYNC_ACTIONS } from "../../common/reducers/todoDictReducer";
 import { Todo, Priority } from "../../common/types";
+import { TokenContext } from "../../common/contexts/TokenContext";
 
 interface ITodoCard {
   defaultDueDate?: string;
@@ -21,6 +22,8 @@ export default function CreateTodoCard({ defaultDueDate }: ITodoCard): JSX.Eleme
   const [formData, setFormData] = useState<IFormData>({ name: "", priority: "planned" });
   const inputRef = useRef<HTMLInputElement>(null);
   const { dispatchTodoDict } = useContext(TodoDictContext);
+  const { token } = useContext(TokenContext);
+
   useEffect(() => {
     document.addEventListener("keyup", (event) => {
       switch (event.code) {
@@ -51,6 +54,10 @@ export default function CreateTodoCard({ defaultDueDate }: ITodoCard): JSX.Eleme
   };
   const submit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+    setCollapsed(true);
+    if (token === "") {
+      return;
+    }
     const newTaskData = {
       name: formData.name,
       priority: formData.priority,
@@ -59,9 +66,8 @@ export default function CreateTodoCard({ defaultDueDate }: ITodoCard): JSX.Eleme
     };
     await dispatchTodoDict({
       type: TODO_DICT_ASYNC_ACTIONS.ADD_NEW_TASK,
-      payload: { task: newTaskData },
+      payload: { task: newTaskData, token: token },
     });
-    setCollapsed(true);
     setFormData({ name: "", priority: "planned" });
   };
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>): void => {

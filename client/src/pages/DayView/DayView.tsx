@@ -3,11 +3,13 @@ import TodoRow from "../../components/TodoRow";
 import CreateTodoCard from "../components/CreateTodoCard";
 import TodoDictContext from "../../common/contexts/TodoDictContext";
 import { TODO_DICT_ASYNC_ACTIONS } from "../../common/reducers/todoDictReducer";
+import { TokenContext } from "../../common/contexts/TokenContext";
 
 export default function DayView(): JSX.Element {
   const [completedTodos, setCompletedTodos] = useState<Array<JSX.Element>>([]);
   const [activeTodos, setActiveTodos] = useState<Array<JSX.Element>>([]);
   const { todoDict, dispatchTodoDict } = useContext(TodoDictContext);
+  const { token } = useContext(TokenContext);
 
   const reloadComponentLists = (): void => {
     setCompletedTodos([]);
@@ -25,8 +27,14 @@ export default function DayView(): JSX.Element {
     setActiveTodos(activeTodoComponents);
   };
   useEffect(() => {
-    dispatchTodoDict({ type: TODO_DICT_ASYNC_ACTIONS.FETCH_ALL_TASKS }).then(() => {});
-  }, []);
+    if (token === "") {
+      return;
+    }
+    dispatchTodoDict({
+      type: TODO_DICT_ASYNC_ACTIONS.FETCH_ALL_TASKS,
+      payload: { token: token },
+    }).then(() => {});
+  }, [token]);
   useEffect(() => {
     reloadComponentLists();
   }, [todoDict]);
