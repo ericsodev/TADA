@@ -32,9 +32,9 @@ export default function StatusMenu(): JSX.Element {
   }, []);
   if (!loggedIn) {
     return (
-      <div className="flex flex-row">
+      <div className="flex flex-row justify-end py-3 px-6">
         <button
-          className="inline-block cursor-pointer rounded-md bg-purple-300 px-3 py-1 font-sans font-medium"
+          className="inline-block cursor-pointer rounded-md bg-purple-200 px-2 py-1 font-sans font-medium text-slate-700"
           onClick={() => {
             window.location.assign("http://localhost:5000/auth/login");
           }}>
