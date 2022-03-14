@@ -7,6 +7,16 @@ There's Another toDo App
 - Learn to authenticate using OAuth 2.0 and third party services
 - Learn to transition to Typescript
 
+## Preview
+
+### Day View
+
+![Dayview](https://github.com/ericsodev/TADA/readme_assets/day.png)
+
+### Board View
+
+![Boardview](https://github.com/ericsodev/TADA/readme_assets/board.png)
+
 ## Progress
 
 Why have Todo lists in markdown when I can build my own
