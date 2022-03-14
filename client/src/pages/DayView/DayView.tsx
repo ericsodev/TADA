@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import TodoRow from "../../todo/TodoRow";
+import TodoRow from "../../components/TodoRow";
 import CreateTodoCard from "../components/CreateTodoCard";
-import TodoDictContext from "../../store/TodoDictContext";
-import { TODO_DICT_ASYNC_ACTIONS } from "../../reducers/todoDictReducer";
+import TodoDictContext from "../../common/contexts/TodoDictContext";
+import { TODO_DICT_ASYNC_ACTIONS } from "../../common/reducers/todoDictReducer";
 
 export default function DayView(): JSX.Element {
   const [completedTodos, setCompletedTodos] = useState<Array<JSX.Element>>([]);

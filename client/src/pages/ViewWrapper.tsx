@@ -1,10 +1,10 @@
-import { ViewContext } from "../store/ViewContext";
+import { ViewContext } from "../common/contexts/ViewContext";
 import { Views, ViewTypes } from "./Views";
 import { useEffect, useReducer, useState } from "react";
-import TodoDictContext from "../store/TodoDictContext";
+import TodoDictContext from "../common/contexts/TodoDictContext";
 import ViewSelector from "./ViewSelector";
-import Header from "../components/Header";
-import { todoReducer, todoAsyncReducer } from "../reducers/todoDictReducer";
+import Header from "../components/Header/";
+import { todoReducer, todoAsyncReducer } from "../common/reducers/todoDictReducer";
 
 const headerProps = {
   Day: { title: "Day", showMessage: true },

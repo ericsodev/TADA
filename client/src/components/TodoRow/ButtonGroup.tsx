@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { TODO_DICT_ASYNC_ACTIONS } from "../../reducers/todoDictReducer";
-import TodoDictContext from "../../store/TodoDictContext";
+import { TODO_DICT_ASYNC_ACTIONS } from "../../common/reducers/todoDictReducer";
+import TodoDictContext from "../../common/contexts/TodoDictContext";
 import { Icon } from "@iconify/react";
 
 interface IButtonGroup {

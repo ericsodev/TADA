@@ -1,6 +1,6 @@
 import React from "react";
-import { getTasks, updateTask, deleteTask, createTask } from "../todo/TodoAPI";
-import { Todo } from "../common/types";
+import { getTasks, updateTask, deleteTask, createTask } from "../../api/todoAPI";
+import { Todo } from "../types";
 
 export const TODO_DICT_ASYNC_ACTIONS = {
   ADD_NEW_TASK: "add_new_task",
@@ -67,9 +67,11 @@ export function todoAsyncReducer(dispatch: React.Dispatch<any>): (action: any) =
       case TODO_DICT_ASYNC_ACTIONS.FETCH_ALL_TASKS:
         newTodoDict = {};
         data = await getTasks();
-        data.forEach((task: Todo) => {
-          newTodoDict[task._id] = task;
-        });
+        if (data !== null) {
+          data.forEach((task: Todo) => {
+            newTodoDict[task._id] = task;
+          });
+        }
         dispatch({ type: TODO_REDUCER_ACTIONS.SET_TASKS, payload: { tasks: newTodoDict } });
         return;
       default:

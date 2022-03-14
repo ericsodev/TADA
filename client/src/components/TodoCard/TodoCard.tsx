@@ -1,7 +1,7 @@
 import { Todo } from "../../common/types";
-import { formatDate } from "../../utilities/DateUtil";
+import { formatDate } from "../../helpers/DateUtil";
 import { isUndefined } from "util";
-import ToolTip from "../../components/ToolTip";
+import ToolTip from "../ToolTip";
 import React, { useEffect } from "react";
 
 interface ITodoCard {

@@ -1,4 +1,4 @@
-import { ViewTypes } from "../views/Views";
+import { ViewTypes } from "../../pages/Views";
 import React from "react";
 
 // TODO: Check if there is need for this Context.

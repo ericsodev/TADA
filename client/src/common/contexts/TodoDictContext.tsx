@@ -1,5 +1,5 @@
 import React from "react";
-import { Todo } from "../common/types";
+import { Todo } from "../types";
 
 interface ITodoListContext {
   todoDict: Record<string, Todo>;

@@ -1,4 +1,4 @@
-import { formatDate } from "../utilities/DateUtil";
+import { formatDate } from "../../helpers/DateUtil";
 
 const dailyPhrases: Array<string> = [
   "No pressure, no diamonds",

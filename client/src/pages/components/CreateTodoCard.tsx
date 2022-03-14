@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Icon } from "@iconify/react";
-import TodoDictContext from "../../store/TodoDictContext";
-import { TODO_DICT_ASYNC_ACTIONS } from "../../reducers/todoDictReducer";
+import TodoDictContext from "../../common/contexts/TodoDictContext";
+import { TODO_DICT_ASYNC_ACTIONS } from "../../common/reducers/todoDictReducer";
 import { Todo, Priority } from "../../common/types";
 
 interface ITodoCard {

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import TodoDictContext from "../../store/TodoDictContext";
-import { TODO_DICT_ASYNC_ACTIONS as dispatchActions } from "../../reducers/todoDictReducer";
+import TodoDictContext from "../../common/contexts/TodoDictContext";
+import { TODO_DICT_ASYNC_ACTIONS as dispatchActions } from "../../common/reducers/todoDictReducer";
 import TodoGroup from "./TodoGroup";
 import { Todo } from "../../common/types";
 

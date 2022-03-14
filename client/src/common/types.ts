@@ -8,3 +8,9 @@ export interface Todo {
   priority: Priority;
   completed: boolean;
 }
+
+export interface DiscordUser {
+  id: string;
+  username: string;
+  avatar: string;
+}

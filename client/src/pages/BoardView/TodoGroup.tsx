@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { reduceEachTrailingCommentRange } from "typescript";
-import { TODO_DICT_ASYNC_ACTIONS as DICT_ACTIONS } from "../../reducers/todoDictReducer";
-import TodoDictContext from "../../store/TodoDictContext";
+import { TODO_DICT_ASYNC_ACTIONS as DICT_ACTIONS } from "../../common/reducers/todoDictReducer";
+import TodoDictContext from "../../common/contexts/TodoDictContext";
 import { Todo } from "../../common/types";
-import TodoCard, { SkeletonTodoCard } from "../../todo/TodoCard";
+import TodoCard, { SkeletonTodoCard } from "../../components/TodoCard";
 
 interface ITodoGroup {
   todos: Array<Todo>;
