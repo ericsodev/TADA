@@ -8,8 +8,11 @@ const router: Router = Router();
 // GET: Retrieve all Todos
 router.get("/todo", async (req, res) => {
     try {
-        if (!req.body.userId) res.status(400).send({ error: "User ID required to get Todos" });
-
+        if (!req.body.userId) {
+            res.status(400).send({ error: "User ID required to get Todo. Are you logged in?" });
+            return;
+        }
+        console.log("here i ran");
         const todo = await Todo.find({ userId: req.body.userId });
         res.send(todo);
     } catch (err) {
@@ -21,7 +24,10 @@ router.get("/todo", async (req, res) => {
 // GET: Retrive todo by <id>
 router.get("/todo/:id", async (req, res) => {
     try {
-        if (!req.body.userId) res.status(400).send({ error: "User ID required to get Todo. Are you logged in?" });
+        if (!req.body.userId) {
+            res.status(400).send({ error: "User ID required to get Todo. Are you logged in?" });
+            return;
+        }
 
         const todo = await Todo.find({ _id: req.params.id, userId: req.body.userId });
         res.send(todo);
@@ -33,7 +39,10 @@ router.get("/todo/:id", async (req, res) => {
 // POST: Create new Todo
 router.post("/todo", async (req, res) => {
     try {
-        if (!req.body.userId) res.status(400).send({ error: "User ID required to create Todo" });
+        if (!req.body.userId) {
+            res.status(400).send({ error: "User ID required to create Todo. Are you logged in?" });
+            return;
+        }
 
         // Verify this user exists
         const user = await User.findOne({ userId: req.body.userId });
@@ -52,7 +61,10 @@ router.post("/todo", async (req, res) => {
 // DELETE: Delete a Todo
 router.delete("/todo/:id", async (req, res) => {
     try {
-        if (!req.body.userId) res.status(400).send({ error: "User ID required to create Todo" });
+        if (!req.body.userId) {
+            res.status(400).send({ error: "User ID required to delete Todo. Are you logged in?" });
+            return;
+        }
 
         // Verify this user exists
         const user = await User.findOne({ userId: req.body.userId });
@@ -70,7 +82,10 @@ router.delete("/todo/:id", async (req, res) => {
 // PATCH: Update a Todo
 router.patch("/todo/:id", async (req, res) => {
     try {
-        if (!req.body.userId) res.status(400).send({ error: "User ID required to create Todo" });
+        if (!req.body.userId) {
+            res.status(400).send({ error: "User ID required to update Todo. Are you logged in?" });
+            return;
+        }
 
         // Verify this user exists
         const user = await User.findOne({ userId: req.body.userId });

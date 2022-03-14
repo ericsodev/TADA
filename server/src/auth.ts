@@ -33,7 +33,7 @@ router.get("/login", (_req, res) => {
 });
 
 router.get("/callback", async (req, res) => {
-    if (!req.query.code) throw new Error("NoCodeProvide");
+    if (req.query.code === undefined) throw new Error("NoCodeProvide");
     let code;
     if (req.query && req.query.code) {
         code = (req.query as any).code;
