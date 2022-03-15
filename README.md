@@ -33,3 +33,5 @@ Why have Todo lists in markdown when I can build my own
 - [ ] Implement more complex Todo queries and editing system
 - [ ] Add progress tracking Todos
 - [ ] Add notification/alerts (perhaps SMS API)
+- [ ] Zen mode
+- [ ] Vim bindings (or general custom bindings)
